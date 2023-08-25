@@ -7,6 +7,7 @@ mydb = mysql.connector.connect(
   database="youtube_data"
 )
 mycursor=mydb.cursor()
+#Creating SQL tables
 def create_channel():
      mycursor.execute("""
             CREATE TABLE IF NOT EXISTS channels (
