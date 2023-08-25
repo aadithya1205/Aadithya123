@@ -1,9 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[35]:
-
-
+#Youtube data harvestion and wareHousing
+#importing the Required Libraries
 import pandas as pd
 import streamlit as st
 from googleapiclient.discovery import build
@@ -17,7 +13,7 @@ st.set_page_config(page_title= "Youtube Data Harvesting and Warehousing ",
                    layout= "wide",
                    initial_sidebar_state= "expanded",
                    menu_items={'About': """# This app is analysis youtube channel"""})
-
+#connectiong with sql and Mongodb
 mydb= sql.connect(
                 host="localhost",
                 database="youtube_data",
@@ -31,7 +27,7 @@ db = client['youtube_datascrape']
 
 api_key = "AIzaSyBftgQYOf8w396IShYsgi7WWbTKCxEm01s"
 youtube = build('youtube','v3',developerKey=api_key)
-
+#Getting channel info through API
 def get_channel_data(channel_ids):
     channel_data = []
     request = youtube.channels().list(
@@ -202,6 +198,7 @@ with tab1:
         channel_details = get_channel_data(channel_ids)
         st.write(f'### Channel Data Extracted Successfully')
         st.write(channel_details)
+      #migrating to mongoddb
     if st.button("Upload Data to MongoDB"):
         with st.spinner('Uploading....'):
             channel_details = get_channel_data(channel_ids)
@@ -218,6 +215,7 @@ with tab1:
             collection3.insert_many(comment_details)
             st.success("Data Uploaded Successfully")
 with tab2:
+   #migrating from mongodb to sql
     st.write("### :yellow[Data Migration to MySQL]")
     def youtube_channel_names():
         channelname = []
