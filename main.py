@@ -18,7 +18,7 @@ mydb= sql.connect(
                 host="localhost",
                 database="youtube_data",
                 user="root",
-                password="Positive011205?"
+                password="**PASSWORD**"
                                 )
 mycursor = mydb.cursor(buffered=True)
 client = MongoClient("mongodb://localhost:27017/")
